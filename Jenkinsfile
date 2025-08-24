@@ -14,6 +14,14 @@ pipeline {
             }
         }
 
+        stage('Test Maven') {
+            steps {
+            //    sh 'mvn test'
+                bat 'mvn test'
+            }
+        }
+
+        
         stage('Build Maven') {
             steps {
             //    sh 'mvn clean install'
@@ -22,12 +30,7 @@ pipeline {
         }
 
 
-        stage('Test Maven') {
-            steps {
-            //    sh 'mvn test'
-                bat 'mvn test'
-            }
-        }
+
 
 
         stage('Docker Image') {
