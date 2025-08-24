@@ -11,13 +11,6 @@ import java.time.LocalDateTime;
 @RequestMapping
 public class DevOpsController {
 
-    // f(x) = 2x + 3
-  /*
-  public float   f(x) {
-      return  2*x + 3;
-    }
- */
-
     //    http://localhost:8080
     @GetMapping
     public String devopsHello() {
