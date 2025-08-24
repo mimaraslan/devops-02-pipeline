@@ -21,6 +21,7 @@ pipeline {
             }
         }
 
+
         stage('Test Maven') {
             steps {
             //    sh 'mvn test'
@@ -28,12 +29,14 @@ pipeline {
             }
         }
 
+
         stage('Docker Image') {
             steps {
             //    sh 'docker build  -t mimaraslan/devops-application:latest   .'
                 bat 'docker build  -t mimaraslan/devops-application:latest   .'
             }
         }
+
 
         stage('Docker Image To DockerHub') {
             steps {
@@ -53,6 +56,8 @@ pipeline {
         }
     
 
+
+
         stage('Deploy Kubernetes') {
             steps {
             script {
@@ -60,7 +65,18 @@ pipeline {
                 }
             }
         }
-        
+
+
+        stage('Docker Image to Clean') {
+            steps {
+              
+                   //  sh 'docker image prune -f'
+                     bat 'docker image prune -f'
+               
+            }
+        }
+
+
 
     }
 
