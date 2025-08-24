@@ -1,8 +1,49 @@
-# DevOps 
+# DevOps Pipeline
 
-### Docker Documentation
+## CI/CD Evreni
+
+```
+
+CI/CD:           (Jenkins, Git,  GitHub, GitOps,  GitHub Actions,    GitLab, GitLab CI,    Bitbucket, Bamboo)
+Scripting        (Python, Bash, PowerShell)
+Containers:      (Docker)
+Orchestration:   (Kubernetes, Helm)
+Cloud            (AWS, Azure, GCP)
+Virtualization:  (VMware, VirtualBox)
+IaC:             (Terraform, Ansible, CloudFormation)
+Monitoring:      (Prometheus, Grafana, ELK)
+```
 
 
+### Jenkins enregrasyon aşamaları
+```
+Kod ---> GitHub    --->  Jenkins      --->  DockerHub  --->  Kubernetes
+         GitLab           -Git              -image            -container   
+         Bitbucket        -Java
+                          -Python
+                          -C#
+                          -Maven
+                          -Gradle
+                          -Docker
+                          -Kubernetes
+```
+
+
+### Jenkins'i indirmek
+https://www.jenkins.io/download/
+
+
+### Jenkins'i war dosyasından çalıştırmak
+https://www.jenkins.io/doc/book/installing/war-file/
+
+```
+cd D:\DevOps
+
+java -jar jenkins.war --httpPort=9999
+```
+
+
+###  Docker'a Terminalden Login olmak.
 ```
 docker login -u           mimaraslan    -p          123456789
 
@@ -12,349 +53,59 @@ docker login -u           mimaraslan    --password  123456789
 
 ```
 
-```
-docker run    --name   my-postgres   -e POSTGRES_USER=postgres    -e POSTGRES_PASSWORD=123456789   -e POSTGRES_DB=postgres  -p 9999:5432    -d postgres
-```
-
-
-### ===============  kendi jarlarımızı image olarak docker'a verme  ====================== 
-
-```
-docker build    --build-arg   JAR_FILE=target/devops-01-hello-1.0.1.jar      --tag mimaraslan/devops-01-hello:v001   .
-```
-
-```
-docker build    --build-arg   JAR_FILE=target/devops-01-hello-1.0.1.jar      --tag mimaraslan/devops-01-hello:latest   .
-```
-
-
-```
-docker build    --build-arg   JAR_FILE=target/devops-01-hello-1.0.2.jar      --tag mimaraslan/devops-01-hello:v002   .
-```
-
-```
-docker build    --build-arg   JAR_FILE=target/devops-01-hello-1.0.2.jar      --tag mimaraslan/devops-01-hello:latest   .
-```
-
-
-```
-docker build    --build-arg   JAR_FILE=target/devops-01-hello-1.0.3.jar      --tag mimaraslan/devops-01-hello:v003   .
-```
-
-```
-docker build    --build-arg   JAR_FILE=target/devops-01-hello-1.0.3.jar      --tag mimaraslan/devops-01-hello:latest   .
-```
-
-
-
-### ===============  kendi imagelerimizi container olarak çalıştırma ====================== 
-
-
-```
-docker           run       -it     -d           --name my-app1         -p 8081:8080                      mimaraslan/devops-01-hello:v001
-```
-
-```
-docker container run       -it     -d           --name my-app1         -p 8081:8080                      mimaraslan/devops-01-hello:v001
-```
-
-```
-docker  run       -it     -d           --name my-app2         -p 8082:8080                      mimaraslan/devops-01-hello:v002
-```
-
-```
-docker  run       -it     -d           --name my-app3         -p 8083:8080                      mimaraslan/devops-01-hello:latest
-```
-
-```
-docker  run       -it     -d           --name my-app4         -p 8084:8080                      mimaraslan/devops-01-hello
-```
-
-
-http://localhost:8081 </br>
-http://localhost:8082 </br>
-http://localhost:8083 </br>
-http://localhost:8084 </br>
-
-
-### ===============  kendi imagelerimizi dockerhub'a gönderme  ======================
-```
-docker push mimaraslan/devops-01-hello:v001
-docker push mimaraslan/devops-01-hello:v002
-docker push mimaraslan/devops-01-hello:latest
-docker push mimaraslan/devops-01-hello
-```
-
-### ===============  kendi imagelerimizi dockerhub'dan çekme  ======================
-```
-docker pull mimaraslan/devops-01-hello:v001
-docker pull mimaraslan/devops-01-hello:v002
-docker pull mimaraslan/devops-01-hello:latest
-docker pull mimaraslan/devops-01-hello
-```
-
-
 
-### ============== network ==============
-### networkleri listele
-
-```
-docker network ls
-```
-
-### yeni bir network oluştur
-```
-docker network create my-network
-```
-
-### network tipini değiştirmek istiyorsanız --driver parametresi
-```
-docker network create --driver bridge my-network
-```
-
-
-### network bilgisi ve onu kullanan containerlar
-```
-docker network inspect my-network
-```
-
-
-### networke container ekleme
-```
-docker network connect my-network my-app1
-docker network connect my-network my-app2
-docker network connect my-network my-app3
-```
-
-### network bilgisi ve onu kullanan containerlar
-```
-docker network inspect my-network
-```
-
-### networke container çıkarma
-```
-docker network disconnect my-app2
-```
-
-
-### network bilgisi ve onu kullanan containerlar
-```
-docker network inspect my-network
-```
-
-### networkü silme
+### Jar dosyasının Docker'a image olarak göndermek
 ```
-docker network rm my-network
-```
-
+docker build    --build-arg   JAR_FILE=target/devops-application.jar      --tag mimaraslan/devops-application:latest   .
 
-### ============== volume ==============
-```
-docker volume ls
-```
-### Yeni bir volume oluşturmak
-```
-docker volume create my-volume
-```
+docker build    --build-arg   JAR_FILE=target/devops-application.jar      -t mimaraslan/devops-application:latest   .
 
-```
-docker volume ls
-```
+docker build    --tag mimaraslan/devops-application:latest   .
 
-```
-docker volume inspect my-volume
+docker build  -t mimaraslan/devops-application:latest   .
 ```
 
-### bir volume silmek
-```
-docker volume rm my-volume
-```
 
-### kullanılmayan tüm volumeleri silmek
-```
-docker volume prune
-```
+### GitHub Token for DevOps
+https://github.com/settings/tokens/new
 
-### ============= docker-compose ===================
-```
-docker compose -f docker-compose.yml up
+### DockerHub Token for DevOps
+https://app.docker.com/accounts/mimaraslan/settings/personal-access-tokens
 
-docker compose -f docker-compose.yaml up
-```
 
-```
-docker ps
-```
 
+###  DockerHub Token ile Terminalden login olmak
 ```
-docker container ls
+docker login -u mimaraslan     -p   dckr_pat_y9zp_9RxQEsjw-0DoInBz6_abc
 ```
 
+### DockerHub Token ile Jenkins'ten login olmak
 ```
-docker-compose logs mongo
-docker-compose logs -f  mongo
+docker login -u mimaraslan     -p   ${DOCKER_HUB_TOKEN}
 ```
-
 
+### Docker Image'ını DockerHub'a göndermek
 ```
-docker compose -f docker-compose.yml down
-
-docker compose -f docker-compose.yaml down
+docker push mimaraslan/devops-application:latest
 ```
-
-
-
-
-
-### ============== Kubernetes K8s ===========
-
-
-https://kubernetes.io/docs/concepts/overview/components/
-
-https://minikube.sigs.k8s.io/docs/start/
 
-Windows için minikube kurulum komudu
+### Windows
 ```
-winget install Kubernetes.minikube
+C:\Users\YOUR_USERNAME\.kube
 ```
 
-MacOS için minikube kurulum komutu
+### MACOS
 ```
-brew install minikube
+cd  ~ ./kube
 ```
 
-== Yeni bir terminal aç ve işin bitinceye kadar onu açık tut ===
+### minikube
 ```
 minikube start
-```
-== Yeni bir terminal aç ve işin bitinceye kadar onu açık tut ===
-```
+
 minikube dashboard
-```
 
-```
-docker pull   mimaraslan/devops-01-hello:latest
-```
-
-```
-docker  run     --name my-app1     -p 8081:8080    -it   -d       mimaraslan/devops-01-hello:latest
+minikube serverice devops-application-service
 ```
 
 
-```
-kubectl version
-```
-
-
-
-
-
-
-
-
-```
-kubectl run    my-pod1    --image=mimaraslan/devops-01-hello:latest
-kubectl run    my-pod2    --image=mimaraslan/devops-01-hello:v002
-kubectl run    my-pod3    --image=mimaraslan/devops-01-hello:v003
-
-kubectl get pods
-
-
-kubectl run    my-pod4    --image=mimaraslan/devops-01-hello:v004
-
-kubectl get pods
-
-
-kubectl delete -n default pod my-pod4
-
-kubectl get pods
-
-
-
-kubectl run    my-pod4    --image=mimaraslan/devops-01-hello:v004
-
-kubectl get pods
-
-
-
-kubectl run    my-pod5    --image=mimaraslan/devops-01-hello:v001
-kubectl run    my-pod6    --image=mimaraslan/devops-01-hello:v002
-kubectl run    my-pod7    --image=mimaraslan/devops-01-hello:v003
-
-
-
-
-
-kubectl run    my-pod8    --image=mysql
-
-kubectl delete pod my-pod8
-
-kubectl get pods
-
-
-kubectl get pods   
-kubectl get pod
-kubectl get po
-
-kubectl get pods   -o wide
-kubectl get pod   -o wide
-kubectl get po   -o wide
-
-
-
-
-kubectl get nodes   
-kubectl get node
-kubectl get no
-
-kubectl get nodes   -o wide
-kubectl get node   -o wide
-kubectl get no   -o wide
-```
-
-===   pod ===
-```
-
-kubectl apply -f    _01_my_pod_create.yaml
-
-kubectl get pods  -o wide
-
-kubectl delete pod    devops-01-hello
-
-kubectl get pods
-
-```
-
-===   deployment ===
-
-
-```
-kubectl apply -f   _01_my_deployment_create.yaml
-
-kubectl delete deployment devops-01-hello
-
-
-kubectl get deployment
-
-kubectl get deploy
-
-kubectl get deployment  -o wide
-
-kubectl get deploy  -o wide
-```
-
-===   service  ===
-```
-
-kubectl apply -f   _01_my_service_create.yaml
-
-kubectl delete service devops-01-hello
-
-
-kubectl get services  -o wide
-
-kubectl get service  -o wide
-
-kubectl get svc  -o wide
-
-```
