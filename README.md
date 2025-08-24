@@ -14,6 +14,7 @@ IaC:             (Terraform, Ansible, CloudFormation)
 Monitoring:      (Prometheus, Grafana, ELK)
 ```
 
+<hr>
 
 ### Jenkins enregrasyon aşamaları
 ```
@@ -28,6 +29,7 @@ Kod ---> GitHub    --->  Jenkins      --->  DockerHub  --->  Kubernetes
                           -Kubernetes
 ```
 
+<hr>
 
 ### Jenkins'i indirmek
 https://www.jenkins.io/download/
@@ -42,6 +44,7 @@ cd D:\DevOps
 java -jar jenkins.war --httpPort=9999
 ```
 
+<hr>
 
 ###  Docker'a Terminalden Login olmak.
 ```
@@ -52,6 +55,7 @@ docker login --username   mimaraslan    --password  123456789
 docker login -u           mimaraslan    --password  123456789
 
 ```
+
 
 
 ### Jar dosyasının Docker'a image olarak göndermek
@@ -65,12 +69,14 @@ docker build    --tag mimaraslan/devops-application:latest   .
 docker build  -t mimaraslan/devops-application:latest   .
 ```
 
+<hr>
 
 ### GitHub Token for DevOps
 https://github.com/settings/tokens/new
 
 ### DockerHub Token for DevOps
 https://app.docker.com/accounts/mimaraslan/settings/personal-access-tokens
+
 
 
 
@@ -82,19 +88,24 @@ docker login -u mimaraslan     -p   dckr_pat_y9zp_9RxQEsjw-0DoInBz6_abc
 ### DockerHub Token ile Jenkins'ten login olmak
 ```
 docker login -u mimaraslan     -p   ${DOCKER_HUB_TOKEN}
+
 ```
+
+<hr>
 
 ### Docker Image'ını DockerHub'a göndermek
 ```
 docker push mimaraslan/devops-application:latest
 ```
 
-### Windows
+<hr>
+
+### Windows'ta minikube config dosyasının konumu
 ```
 C:\Users\YOUR_USERNAME\.kube
 ```
 
-### MACOS
+### MacOS'ta minikube config dosyasının konumu
 ```
 cd  ~ ./kube
 ```
