@@ -116,7 +116,7 @@ minikube start
 
 minikube dashboard
 
-minikube serverice devops-application-service
+minikube service devops-application-service
 ```
 
 
