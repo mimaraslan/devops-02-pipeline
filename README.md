@@ -102,12 +102,12 @@ docker push mimaraslan/devops-application:latest
 
 ### Windows'ta minikube config dosyasının konumu
 ```
-C:\Users\YOUR_USERNAME\.kube
+C:\Users\YOUR_USERNAME\.kube\config
 ```
 
 ### MacOS'ta minikube config dosyasının konumu
 ```
-cd  ~ ./kube
+cd ~/.kube/config
 ```
 
 ### minikube
