@@ -107,7 +107,7 @@ C:\Users\YOUR_USERNAME\.kube\config
 
 ### MacOS'ta minikube config dosyasının konumu
 ```
-cd ~/.kube/config
+~/.kube/config
 ```
 
 ### minikube
